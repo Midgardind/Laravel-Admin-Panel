@@ -18,18 +18,26 @@
 </head>
 <body>
 
-  <div class="d-flex bg-light" id="wrapper">
+  <div class="d-flex bg-secondary" id="wrapper">
 
     <!-- Sidebar -->
     <div class="bg-dark border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading text-light">Midgard Industries</div>
+      <div class="sidebar-heading text-light"><a class="text-light" href="/">Midgard Industries</a></div>
       <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action bg-dark text-light">Dashboard</a>
-        <a href="#" class="list-group-item list-group-item-action bg-dark text-light">Shortcuts</a>
-        <a href="#" class="list-group-item list-group-item-action bg-dark text-light">Overview</a>
-        <a href="#" class="list-group-item list-group-item-action bg-dark text-light">Events</a>
-        <a href="#" class="list-group-item list-group-item-action bg-dark text-light">Profile</a>
-        <a href="#" class="list-group-item list-group-item-action bg-dark text-light">Status</a>
+        <a href="/admin" class="list-group-item list-group-item-action bg-dark text-light {{Request::is('admin') ? 'bg-dark' : ''}}">Home Page</a>
+        <a href="/admin/about" class="list-group-item list-group-item-action bg-dark text-light {{Request::is('admin/about') ? 'bg-dark' : ''}}">About Page</a>
+        <a href="/admin/portfolio" class="list-group-item list-group-item-action bg-dark text-light {{Request::is('admin/portfolio') ? 'bg-dark' : ''}}">Portfolio Page</a>
+        <a href="/admin/clients" class="list-group-item list-group-item-action bg-dark text-light {{Request::is('admin/clients') ? 'bg-dark' : ''}}">Clients Page</a>
+        <a href="/admin/pricing" class="list-group-item list-group-item-action bg-dark text-light {{Request::is('admin/pricing') ? 'bg-dark' : ''}}">Pricing Page</a>
+        <a href="/admin/contact" class="list-group-item list-group-item-action bg-dark text-light {{Request::is('admin/contact') ? 'bg-dark' : ''}}">Contact Page</a>
+        <a href="/admin/blog" class="list-group-item list-group-item-action bg-dark text-light  {{Request::is('admin/blog') || Request::is('admin/blog/*') || Request::is('admin/blog/*/edit') ? 'bg-dark' : ''}}">Blog Page</a>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="text-center">
+          <a class="btn btn-info" href="{{ route('register') }}">{{ __('Register new user') }}</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
