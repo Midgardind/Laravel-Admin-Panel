@@ -31,3 +31,4 @@ Route::resource('/admin/blog-categories', 'admin\CategoryController', ['as' => '
 Route::resource('/admin/blog-tags', 'admin\TagController', ['as' => 'admin-blog-tags', 'except' => ['create']]);
 
 //Front End Routes
+Route::get('/blog', 'frontend\PagesController@blog')->name('blog');
