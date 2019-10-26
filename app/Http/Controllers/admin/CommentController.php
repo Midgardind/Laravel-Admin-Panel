@@ -10,6 +10,11 @@ use Session;
 
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -78,7 +83,8 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comment = Comment::find($id);
+        return view('admin.blog-comments-edit')->with('comment', $comment);
     }
 
     /**
@@ -90,7 +96,25 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comment = Comment::find($id);
+        $this->validate($request, array('comment' => 'required'));
+        $comment->comment = $request->comment;
+        $comment->save();
+        Session::flash('success', 'Comment updated Successfully');
+
+        return redirect()->route('admin-blog.blog.show', $comment->post->id);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delete($id)
+    {
+        $comment = Comment::find($id);
+        return view('admin.blog-comments-delete')->with('comment', $comment);
     }
 
     /**
@@ -101,6 +125,12 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::find($id);
+        $post_id = $comment->post->id;
+        $comment->delete();
+
+        Session::flash('success', 'Comment deleted Successfully');
+
+        return redirect()->route('admin-blog.blog.show', $post_id);
     }
 }
