@@ -10,7 +10,7 @@
                     <div class="mb-3">
                         <h2 class="">{{$post->title}}</h2>
                         <h6>Published: {{date('M j, Y', strtotime($post->created_at))}}</h6>
-                        <p class="">{{substr($post->body, 0, 200)}}{{strlen($post->body) > 50 ? '...' : ''}}</p>
+                        <p class="">{{substr(strip_tags($post->body), 0, 200)}}{{strlen(strip_tags($post->body)) > 50 ? '...' : ''}}</p>
                         <a href="{{url('blog/'.$post->slug)}}" class="btn btn-primary btn-sm">Read More</a>
                         <hr>
                     </div>

@@ -16,7 +16,7 @@
 	      		@include('layouts.messages')
 				<div class="mb-3">
 					<h2 class=""><a href="">{{$post->title}}</a></h2>
-					<p class="">{{substr($post->body, 0, 200)}}{{strlen($post->body) > 50 ? '...' : ''}}</p>
+					<p class="">{!!$post->body!!}</p>
 					<hr>
 					<p>Posted In: {{$post->category->name}}</p>
 				</div>

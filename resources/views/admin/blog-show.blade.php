@@ -21,7 +21,7 @@
               <div class="row">
               	<div class="col-md-8 p-2">
               		<h1>{{$post->title}}</h1>
-              		<p class="lead pt-2">{{$post->body}}</p>
+              		<p class="lead pt-2">{!!$post->body!!}</p>
                   <hr>
                   <div class="div">
                     <div class="tags">

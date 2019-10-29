@@ -16,6 +16,14 @@
   <!-- Custom styles for this template -->
   <link href="{{ asset('css/simple-sidebar.css') }}" rel="stylesheet">
   <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
+  <script src="https://cdn.tiny.cloud/1/f6jygj44c9yr7utyrie5gse7czovue3umeeftona9r7yg8na/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <script>
+  tinymce.init({
+    selector:'textarea',
+    plugins:'link code lists',
+
+  });
+</script>
 </head>
 <body>
 
