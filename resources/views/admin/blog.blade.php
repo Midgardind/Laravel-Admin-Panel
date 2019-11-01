@@ -25,6 +25,7 @@
                     		<th>Title</th>
                     		<th>Body</th>
                     		<th>Created At</th>
+                            <th>Featured Image</th>
                     		<th></th>
                     	</thead>
                     	<tbody>
@@ -34,6 +35,7 @@
             						<td>{{$post->title}}</td>
             						<td>{{substr(strip_tags($post->body), 0, 50)}}{{strlen(strip_tags($post->body)) > 50 ? '...' : ''}}</td>
             						<td>{{date('M j, Y', strtotime($post->created_at))}}</td>
+                                    <td><img src="{{ asset('images/' . $post->image) }}" alt="" height="auto" width="150px"></td>
             						<td>
             							<a href="{{route('admin-blog.blog.show', $post->id)}}" class="btn btn-info btn-sm mx-1">View</a>
             							<a href="{{route('admin-blog.blog.edit', $post->id)}}" class="btn btn-info btn-sm mx-1">Edit</a>

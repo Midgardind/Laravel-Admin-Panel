@@ -9,6 +9,8 @@ use App\Category;
 use App\Tag;
 use Session;
 use Purifier;
+use Image;
+use Storage;
 
 class PostController extends Controller
 {
@@ -61,6 +63,7 @@ class PostController extends Controller
             'body' => 'required',
             'category_id' => 'required|numeric',
             'slug' => 'required|alpha_dash|min:5|max:100|unique:posts,slug',
+            'featured_image' => 'sometimes|image|max:10000',
         ));
 
         $post = new Post;
@@ -68,6 +71,15 @@ class PostController extends Controller
         $post->slug = $request->slug;
         $post->category_id = $request->category_id;
         $post->body = Purifier::clean($request->body, 'youtube');
+
+        if($request->hasFile('featured_image')) {
+            $image = $request->file('featured_image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/' . $filename);
+            Image::make($image)->resize(800,400)->save($location);
+            $post->image = $filename;
+        }
+
         $post->save();
 
         $post->tags()->sync($request->tags, false);
@@ -123,27 +135,31 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::find($id);
-        if($request->input('slug') ==  $post->slug) {
-           $this->validate($request, array(
+        
+        $this->validate($request, array(
             'title' => 'required|max:250',
             'category_id' => 'required|integer',
             'body' => 'required',
-            )); 
-        }   
-        else {
-            $this->validate($request, array(
-                'title' => 'required|max:250',
-                'category_id' => 'required|integer',
-                'body' => 'required',
-                'slug' => 'required|alpha_dash|min:5|max:100|unique:posts,slug',
-            ));
-        }
+            'slug' => "required|alpha_dash|min:5|max:100|unique:posts,slug,$id",
+            'featured_image' => 'sometimes|image|max:10000',
+        ));
             
         $post = Post::find($id);
         $post->title = $request->input('title');
         $post->slug = $request->input('slug');
         $post->category_id = $request->input('category_id');
         $post->body = Purifier::clean($request->input('body'), 'youtube');
+
+        if($request->hasFile('featured_image')) {
+            $image = $request->file('featured_image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/' . $filename);
+            Image::make($image)->resize(800,400)->save($location);
+            $oldFilename = $post->image;
+            $post->image = $filename;
+            Storage::delete($oldFilename);
+        }
+
         $post->save();
 
         if(isset($request->tags)) {
@@ -167,6 +183,7 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $post->tags()->detach();
+        Storage::delete($post->image);
         $post->delete();
 
         Session::flash('success', 'Post successfully deleted!');

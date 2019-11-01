@@ -8,10 +8,18 @@
             <div class="col-md-8 offset-md-2">
                 @foreach($posts as $post)
                     <div class="mb-3">
-                        <h2 class="">{{$post->title}}</h2>
-                        <h6>Published: {{date('M j, Y', strtotime($post->created_at))}}</h6>
-                        <p class="">{{substr(strip_tags($post->body), 0, 200)}}{{strlen(strip_tags($post->body)) > 50 ? '...' : ''}}</p>
-                        <a href="{{url('blog/'.$post->slug)}}" class="btn btn-primary btn-sm">Read More</a>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img src="{{ asset('images/' . $post->image) }}" alt="" height="auto" width="100%">
+                            </div>
+                            <div class="col-md-9">
+                                <h2 class="">{{$post->title}}</h2>
+                                <h6>Published: {{date('M j, Y', strtotime($post->created_at))}}</h6>
+                                <p class="">{{substr(strip_tags($post->body), 0, 200)}}{{strlen(strip_tags($post->body)) > 50 ? '...' : ''}}</p>
+                                <a href="{{url('blog/'.$post->slug)}}" class="btn btn-primary btn-sm">Read More</a>
+                            </div>
+                        </div>
+                        
                         <hr>
                     </div>
                 @endforeach

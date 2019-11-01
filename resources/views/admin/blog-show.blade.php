@@ -20,6 +20,7 @@
           <div class="card-body p-3">
               <div class="row">
               	<div class="col-md-8 p-2">
+                  <img src="{{ asset('images/' . $post->image) }}" alt="" height="auto" width="100%">
               		<h1>{{$post->title}}</h1>
               		<p class="lead pt-2">{!!$post->body!!}</p>
                   <hr>

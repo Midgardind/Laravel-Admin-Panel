@@ -15,7 +15,8 @@
 	      	<div class="col-md-9">
 	      		@include('layouts.messages')
 				<div class="mb-3">
-					<h2 class=""><a href="">{{$post->title}}</a></h2>
+					<img src="{{ asset('images/' . $post->image) }}" alt="">
+					<h2 class="mt-2"><a href="">{{$post->title}}</a></h2>
 					<p class="">{!!$post->body!!}</p>
 					<hr>
 					<p>Posted In: {{$post->category->name}}</p>

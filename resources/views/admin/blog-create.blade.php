@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <div class="row">
                     	<div class="col-md-8 offset-md-2 my-5">
-                    		{!! Form::open(['route' => 'admin-blog.blog.store']) !!}
+                    		{!! Form::open(['route' => 'admin-blog.blog.store', 'files' => true]) !!}
             					{{Form::label('title', 'Title:')}}
             					{{Form::text('title', null, array('class' => 'form-control mb-3'))}}
 
@@ -29,7 +29,10 @@
                                             <option value="{{$tag->id}}">{{$tag->name}}</option>
                                     @endforeach
                                 </select>
-
+                                <div class="my-3">
+                                {{Form::label('featured_image', 'Upload Featured Image:')}}
+                                {{Form::file('featured_image', null, array('class' => 'form-control mb-3'))}}
+                                </div>
             					{{Form::label('body', 'Content:')}}
             					{{Form::textarea('body', null, array('class' => 'form-control mb-3'))}}
 
