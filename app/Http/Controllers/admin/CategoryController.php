@@ -49,7 +49,7 @@ class CategoryController extends Controller
 
         Session::flash('success', 'New Category Created Successfully');
 
-        return redirect()->route('admin-blog.blog.create');
+        return back();
     }
 
     /**
@@ -94,7 +94,7 @@ class CategoryController extends Controller
 
         Session::flash('success', 'Category successfully updated!');
 
-        return redirect()->route('admin-blog-categories.blog-categories.index');
+        return back();
     }
 
     /**
@@ -109,6 +109,6 @@ class CategoryController extends Controller
 
         Session::flash('success', 'Category successfully deleted!');
 
-        return redirect()->route('admin-blog-categories.blog-categories.index');
+        return back();
     }
 }

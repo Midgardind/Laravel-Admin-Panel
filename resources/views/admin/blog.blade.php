@@ -2,11 +2,11 @@
 
 @section('content')
 
-<div class="container my-4">
+<div class="container-fluid my-4">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-11">
             @include('layouts.messages')
-            <div class="card">
+            <div class="card bg-light">
                 <div class="card-header bg-dark text-light">
                 	<div class="row">
                 		<div class="col-md-10 text my-auto">
@@ -19,31 +19,49 @@
                 </div>
 
                 <div class="card-body">
-                    <table class="table">
-                    	<thead>
-                    		<th>#</th>
-                    		<th>Title</th>
-                    		<th>Body</th>
-                    		<th>Created At</th>
-                            <th>Featured Image</th>
-                    		<th></th>
-                    	</thead>
-                    	<tbody>
-                    		@foreach($posts as $post)
-            					<tr>
-            						<th>{{$post->id}}</th>
-            						<td>{{$post->title}}</td>
-            						<td>{{substr(strip_tags($post->body), 0, 50)}}{{strlen(strip_tags($post->body)) > 50 ? '...' : ''}}</td>
-            						<td>{{date('M j, Y', strtotime($post->created_at))}}</td>
-                                    <td><img src="{{ asset('images/' . $post->image) }}" alt="" height="auto" width="150px"></td>
-            						<td>
-            							<a href="{{route('admin-blog.blog.show', $post->id)}}" class="btn btn-info btn-sm mx-1">View</a>
-            							<a href="{{route('admin-blog.blog.edit', $post->id)}}" class="btn btn-info btn-sm mx-1">Edit</a>
-            						</td>
-            					</tr>
-                    		@endforeach
-                    	</tbody>
-                    </table>
+                    <div class="row border-bottom">
+                        <div class="col-sm-1 text-center">
+                            <p>#</p>
+                        </div>
+                        <div class="col-sm-2">
+                            <p>Title</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <p>Body</p>
+                        </div>
+                        <div class="col-sm-2 text-center">
+                            <p>Created At</p>
+                        </div>
+                        <div class="col-sm-2 text-center">
+                            <p>Featured Image</p>
+                        </div>
+                        <div class="col-sm-1 text-center">
+                            <p></p>
+                        </div>
+                    </div>
+                    @foreach($posts as $post)
+                        <div class="row border-bottom pt-1">
+                            <div class="col-sm-1 text-center">
+                                <p>{{$post->id}}</p>
+                            </div>
+                            <div class="col-sm-2">
+                                <p>{{$post->title}}</p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p>{{substr(strip_tags($post->body), 0, 50)}}{{strlen(strip_tags($post->body)) > 50 ? '...' : ''}}</p>
+                            </div>
+                            <div class="col-sm-2 text-center">
+                                <p>{{date('M j, Y', strtotime($post->created_at))}}</p>
+                            </div>
+                            <div class="col-sm-2 text-center">
+                                <p>@if($post->image)<img src="{{ asset('images/' . $post->image) }}" alt="" height="auto" width="100%">@endif</p>
+                            </div>
+                            <div class="col-sm-1 text-center">
+                                <a href="{{route('admin-blog.blog.show', $post->id)}}" class="btn btn-info btn-sm m-1">View</a>
+                                <a href="{{route('admin-blog.blog.edit', $post->id)}}" class="btn btn-info btn-sm m-1">Edit</a>
+                            </div>
+                        </div>
+                    @endforeach
                     <div class="row mx-auto">
                         <div class="col-md-12 mx-auto">
                             {!!$posts->links()!!}

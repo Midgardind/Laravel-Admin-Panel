@@ -10,7 +10,7 @@
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-md-3">
-                                <img src="{{ asset('images/' . $post->image) }}" alt="" height="auto" width="100%">
+                                @if($post->image)<img src="{{ asset('images/' . $post->image) }}" alt="" height="auto" width="100%">@endif
                             </div>
                             <div class="col-md-9">
                                 <h2 class="">{{$post->title}}</h2>

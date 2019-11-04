@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use App\Tag;
+use App\Comment;
 use Session;
 use Purifier;
 use Image;
@@ -98,8 +99,9 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
+        $comment = Comment::all()->where('post_id', $id);
 
-        return view('admin.blog-show')->with('post', $post);
+        return view('admin.blog-show')->with('post', $post)->with('comment', $comment);
     }
 
     /**
@@ -122,7 +124,7 @@ class PostController extends Controller
             $tags2[$tag->id] = $tag->name;
         }
 
-        return view('admin.blog-edit')->with('post', $post)->with('categories', $cats)->with('tags', $tags2);
+        return view('admin.blog-edit')->with('post', $post)->with('cats', $cats)->with('categories', $categories)->with('tags2', $tags2)->with('tags', $tags);
     }
 
     /**

@@ -59,7 +59,7 @@ class TagController extends Controller
 
         Session::flash('success', 'New Tag Created Successfully');
 
-        return redirect()->route('admin-blog-tags.blog-tags.index');
+        return back();
     }
 
     /**
@@ -104,7 +104,7 @@ class TagController extends Controller
 
         Session::flash('success', 'Tag successfully updated!');
 
-        return redirect()->route('admin-blog-tags.blog-tags.index');
+        return back();
     }
 
     /**
@@ -121,5 +121,6 @@ class TagController extends Controller
 
         Session::flash('success', 'Tag successfully deleted!');
 
-        return redirect()->route('admin-blog-tags.blog-tags.index');    }
+        return back();
+    }
 }

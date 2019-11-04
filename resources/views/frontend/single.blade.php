@@ -15,7 +15,7 @@
 	      	<div class="col-md-9">
 	      		@include('layouts.messages')
 				<div class="mb-3">
-					<img src="{{ asset('images/' . $post->image) }}" alt="">
+					@if($post->image)<img src="{{ asset('images/' . $post->image) }}" alt="">@endif
 					<h2 class="mt-2"><a href="">{{$post->title}}</a></h2>
 					<p class="">{!!$post->body!!}</p>
 					<hr>

@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 //Admin routes
-Route::get('/admin', 'admin\AdminPagesController@index')->name('admin');
+Route::get('/admin', 'admin\AdminPagesController@index')->name('admin-home');
 Route::get('/admin/about', 'admin\AdminPagesController@about')->name('admin-about');
 Route::get('/admin/portfolio', 'admin\AdminPagesController@portfolio')->name('admin-portfolio');
 Route::get('/admin/clients', 'admin\AdminPagesController@clients')->name('admin-clients');
